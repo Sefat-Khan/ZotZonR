@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --primary-color: #2e0000;
+    --secondary-color: #7a0222;
+    --text-black: #000000;
+    --text-white: #ffffff;
+}
+
+li.relative {
+  position: relative;
+}
+
+li.relative .progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+li.relative:hover .progress {
+  width: 100%;
+}
