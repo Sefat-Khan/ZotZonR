@@ -34,14 +34,14 @@ class TrendingsController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:products,slug',
+            'slug' => 'nullable|string|max:255|unique:trendings,slug',
             'image' => 'required|image|max:5120',
             'description' => 'nullable|min:5',
             'discount' => 'nullable|numeric',
             'status' => 'required|in:Active,Inactive',
         ]);
 
-        $validatedData['image'] = $request->file('image')->store('products', 'public');
+        $validatedData['image'] = $request->file('image')->store('trendings', 'public');
 
 Trending::create($validatedData);
 
