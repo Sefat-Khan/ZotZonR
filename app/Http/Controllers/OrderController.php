@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         return inertia('Admin/Order/Orders', [
-            'orders' => Order::latest()->paginate(8),
+            'orders' => Order::with('items.product')->latest()->paginate(8),
         ]);
     }
 
@@ -39,23 +39,24 @@ class OrderController extends Controller
             'cart' => 'required|array',
         ]);
 
-        foreach ($request->cart as $item) {
-            $product = Product::findOrFail($item['id']);
+        $order = Order::create([
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'shipping_address' => $request->shipping_address,
+        'user_id' => auth()->id(),
+        'total_price' => collect($request->cart)->sum('totalPrice'),
+        'payment_info' => 'Unpaid',
+        'order_status' => 'Processing',
+        'status' => 'Active',
+    ]);
 
-            Order::create([
-                'name' => $request->name,
-                'slug' => Str::slug($request->name . '-' . uniqid()),
-                'product_id' => $product->id,
-                'user_id' => auth()->id(),
-                'image' => $product->image,
-                'phone' => $request->phone,
-                'shipping_address' => $request->shipping_address,
-                'total_price' => $item['totalPrice'],
-                'payment_info' => 'Unpaid',
-                'order_status' => 'processing',
-                'status' => 'Active',
-            ]);
-        }
+    foreach ($request->cart as $item) {
+        $order->items()->create([
+            'product_id' => $item['id'],
+            'quantity' => $item['quantity'],
+            'price' => $item['price'],
+        ]);
+    }
 
         return redirect()->route('home')->with('success', 'Order placed successfully!');
     }
@@ -64,11 +65,12 @@ class OrderController extends Controller
      * Display the specified resource.
      */
     public function show(Order $order)
-    {
-        return inertia('Admin/Order/Preview', [
-            'order' => $order,
-        ]);
-    }
+{
+
+    return inertia('Admin/Order/Preview', [
+        'order' => $order->load('items.product'),
+    ]);
+}
     
 
     /**
@@ -84,14 +86,27 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $order->update($request->only([
-            'payment_info',
-            'order_status',
-            'status',
-        ]));
+        $request->validate([
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'shipping_address' => 'required|string',
+            'payment_info' => 'required|in:Paid,Unpaid',
+            'order_status' => 'required|in:Processing,Shipped,Complete',
+            'status' => 'required|in:Active,Inactive',
+        ]);
+
+        $order->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'shipping_address' => $request->shipping_address,
+            'payment_info' => $request->payment_info,
+            'order_status' => $request->order_status,
+            'status' => $request->status,
+        ]);
 
         return back()->with('success', 'Order updated successfully!');
     }
+
 
     /**
      * Remove the specified resource from storage.

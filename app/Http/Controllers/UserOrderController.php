@@ -13,24 +13,33 @@ class UserOrderController extends Controller
 public function userOrders()
 {
     // Fetch only orders of the logged-in user
-    $orders = Order::where('user_id', auth()->id())
-        ->latest()
-        ->get();
-
     return inertia('Order', [
-        'orders' => $orders,
+        'orders' => Order::with('items.product')
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->get(),
     ]);
 }
 
 public function show(Order $order)
     {
         
-        return inertia('OrderDetails', ['order' => $order]);
+        $order->load('items.product');
+
+        return inertia('OrderDetails', [
+            'order' => $order,
+        ]);
+
     }
 
 public function generatePDF(Order $order) {
-    $pdf = Pdf::loadView('pdf.order', ['order' => $order]);
-    return $pdf->download('order'. $order->id.'.pdf');
+    $order->load('items.product');
+
+    $pdf = Pdf::loadView('pdf.order', [
+        'order' => $order
+    ]);
+
+    return $pdf->download('order-' . $order->id . '.pdf');
 }
 
 }

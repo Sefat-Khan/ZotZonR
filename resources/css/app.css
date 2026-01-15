@@ -33,3 +33,28 @@ li.relative .progress {
 li.relative:hover .progress {
   width: 100%;
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* This ensures that all slides in the view are visible regardless of 'active' status */
+.swiper-slide {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+/* Prevents the swiper container from clipping your card shadows */
+.swiper {
+    overflow: visible !important;
+}
+
+/* Ensure the wrapper is using flex correctly */
+.swiper-wrapper {
+    display: flex !important;
+}

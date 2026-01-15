@@ -15,8 +15,7 @@ class ShopController extends Controller
         return Inertia::render('Shop', [
             'products' => Product::with(['brand', 'category'])
                 ->where('status', 'Active')
-                ->latest()
-                ->get(),
+                ->latest()->get(),
 
             'categories' => Category::where('status', 'Active')->get(),
             'brands' => Brand::where('status', 'Active')->get(),

@@ -1,104 +1,141 @@
-import React from "react";
-import { Link, usePage } from "@inertiajs/react";
+import React from 'react';
+import { Link, usePage } from '@inertiajs/react';
+import { Package, MapPin, ChevronRight, ShoppingBag } from 'lucide-react';
+
+type OrderItem = {
+    id: number;
+    quantity: number;
+    price: number;
+    product: {
+        id: number;
+        name: string;
+        image_url: string;
+    };
+};
 
 type Order = {
-  id: number;
-  name: string;
-  product_id: number;
-  image_url: string;
-  shipping_address: string;
-  phone: string;
-  total_price: number;
-  payment_info: "Paid" | "Unpaid";
-  order_status: "processing" | "shipped" | "complete";
+    id: number;
+    name: string;
+    shipping_address: string;
+    phone: string;
+    total_price: number;
+    payment_info: 'Paid' | 'Unpaid';
+    order_status: 'processing' | 'shipped' | 'complete';
+    items: OrderItem[];
 };
 
 export default function OrderContent() {
-  const { orders } = usePage().props as { orders: Order[] };
+    const { orders } = usePage().props as { orders: Order[] };
 
-  if (!orders || orders.length === 0)
+    if (!orders || orders.length === 0) {
+        return (
+            <div className="flex min-h-[60vh] flex-col items-center justify-center space-y-4">
+                <ShoppingBag size={64} className="text-gray-200" />
+                <p className="text-xl font-medium italic text-gray-400">You have no orders yet.</p>
+                <Link href="/" className="text-sm font-bold uppercase tracking-widest text-[var(--secondary-color)] underline underline-offset-8">
+                    Start Shopping
+                </Link>
+            </div>
+        );
+    }
+
     return (
-      <div className="text-center text-gray-500 mt-32 text-lg">
-        You have no orders yet.
-      </div>
+        <div className="container mx-auto px-4 py-16">
+            <header className="mb-16 text-center">
+                <h1 className="text-5xl font-black uppercase italic tracking-tighter text-[var(--primary-color)]">
+                    My <span className="text-[var(--secondary-color)]">Orders</span>
+                </h1>
+                <div className="mx-auto mt-2 h-1 w-24 bg-[var(--secondary-color)]"></div>
+            </header>
+
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+                {orders.map((order) => {
+                    const previewImage = order.items?.[0]?.product.image_url || '/placeholder.png';
+
+                    return (
+                        <div
+                            key={order.id}
+                            className="group overflow-hidden rounded-2xl bg-white shadow-xl shadow-gray-200/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                        >
+                            {/* Image Section */}
+                            <div className="relative h-64 w-full overflow-hidden">
+                                <img
+                                    src={previewImage}
+                                    alt={order.name}
+                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                />
+
+                                {/* Status Overlay Tags */}
+                                <div className="absolute left-4 top-4 flex flex-col gap-2">
+                                    <span
+                                        className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg backdrop-blur-md ${
+                                            order.payment_info === 'Paid' ? 'bg-green-600/80' : 'bg-red-600/80'
+                                        }`}
+                                    >
+                                        {order.payment_info}
+                                    </span>
+                                    <span
+                                        className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg backdrop-blur-md ${
+                                            order.order_status === 'complete'
+                                                ? 'bg-[var(--primary-color)]/80'
+                                                : order.order_status === 'shipped'
+                                                  ? 'bg-blue-600/80'
+                                                  : 'bg-orange-500/80'
+                                        }`}
+                                    >
+                                        {order.order_status}
+                                    </span>
+                                </div>
+
+                                <div className="from-[var(--primary-color)]/80 absolute bottom-0 left-0 w-full bg-gradient-to-t to-transparent p-4">
+                                    <p className="text-xs font-bold uppercase tracking-widest text-white/70">Order ID</p>
+                                    <p className="text-xl font-black italic text-white">#{order.id}</p>
+                                </div>
+                            </div>
+
+                            {/* Details Section */}
+                            <div className="p-6">
+                                <div className="mb-4 flex items-start justify-between">
+                                    <div>
+                                        <h2 className="text-lg font-black leading-tight text-[var(--text-black)]">{order.name}</h2>
+                                        <div className="mt-1 flex items-center gap-1 text-gray-400">
+                                            <MapPin size={14} />
+                                            <p className="w-40 truncate text-xs font-medium">{order.shipping_address}</p>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-[10px] font-black uppercase text-[var(--secondary-color)]">Total</p>
+                                        <p className="text-xl font-black tracking-tighter text-[var(--primary-color)]">৳{order.total_price}</p>
+                                    </div>
+                                </div>
+
+                                <div className="mb-6 space-y-2 border-t border-gray-50 pt-4">
+                                    <p className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                                        <Package size={12} /> Items ({order.items.length})
+                                    </p>
+                                    <ul className="space-y-1">
+                                        {order.items.slice(0, 2).map((item) => (
+                                            <li key={item.id} className="truncate text-sm font-bold text-gray-600">
+                                                <span className="text-[var(--secondary-color)]">×{item.quantity}</span> {item.product.name}
+                                            </li>
+                                        ))}
+                                        {order.items.length > 2 && (
+                                            <li className="text-xs italic text-gray-400">+ {order.items.length - 2} more items</li>
+                                        )}
+                                    </ul>
+                                </div>
+
+                                <Link
+                                    href={route('user.order.show', order.id)}
+                                    className="flex items-center justify-center gap-2 rounded-xl bg-gray-50 py-4 text-xs font-black uppercase tracking-[0.2em] text-[var(--primary-color)] transition-all hover:bg-[var(--primary-color)] hover:text-white"
+                                >
+                                    Track Order <ChevronRight size={14} />
+                                </Link>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
     );
-
-  return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-10 text-center text-gray-800">
-        My Orders
-      </h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {orders.map((order) => (
-          <div
-            key={order.id}
-            className="bg-white rounded-xl shadow-md hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
-          >
-            <div className="relative">
-              <img
-                src={order.image_url}
-                alt={order.name}
-                className="w-full h-52 object-cover"
-              />
-              <div className="absolute top-2 right-2 flex gap-2">
-                <span
-                  className={`px-2 py-1 text-xs font-semibold rounded-full text-white ${
-                    order.payment_info === "Paid"
-                      ? "bg-green-500"
-                      : "bg-red-500"
-                  }`}
-                >
-                  {order.payment_info}
-                </span>
-                <span
-                  className={`px-2 py-1 text-xs font-semibold rounded-full text-white ${
-                    order.order_status === "complete"
-                      ? "bg-green-500"
-                      : order.order_status === "shipped"
-                      ? "bg-blue-500"
-                      : "bg-yellow-500"
-                  }`}
-                >
-                  {order.order_status.toUpperCase()}
-                </span>
-              </div>
-            </div>
-
-            <div className="p-5 flex flex-col gap-3">
-              <h2 className="text-xl font-semibold text-gray-800">
-                {order.name}
-              </h2>
-              <div className="text-gray-600 space-y-1 text-sm">
-                <p>
-                  <span className="font-semibold">Order ID:</span> {order.id}
-                </p>
-                <p>
-                  <span className="font-semibold">Product ID:</span> {order.product_id}
-                </p>
-                <p>
-                  <span className="font-semibold">Shipping:</span> {order.shipping_address}
-                </p>
-                <p>
-                  <span className="font-semibold">Phone:</span> {order.phone}
-                </p>
-                <p>
-                  <span className="font-semibold">Total:</span>{" "}
-                  <span className="text-lg font-bold text-gray-900">৳{order.total_price}</span>
-                </p>
-              </div>
-
-              <Link
-                href={route('user.order.show', order)}
-                
-                className="mt-4 w-full bg-[var(--primary-color)] text-white py-2 rounded-lg font-semibold hover:bg-[var(--secondary-color)] transition-colors cursor-pointer text-center"
-              >
-                View Details
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 }

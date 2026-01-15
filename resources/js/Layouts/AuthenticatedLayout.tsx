@@ -13,14 +13,12 @@ export default function AuthenticatedLayout({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen" style={{ backgroundColor: 'var(--primary-color)' }}>
-            <div className="grid grid-rows-[auto_1fr] grid-cols-1 md:grid-cols-[250px_1fr] min-h-screen">
-
+        <div className="min-h-screen italic" style={{ backgroundColor: 'var(--primary-color)' }}>
+            <div className="grid min-h-screen grid-cols-1 grid-rows-[auto_1fr] md:grid-cols-[250px_1fr]">
                 {/* ================= HEADER ================= */}
-                <header className="col-span-full bg-white shadow-sm z-30">
+                <header className="z-30 col-span-full bg-white shadow-sm">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="flex h-16 justify-between items-center">
-
+                        <div className="flex h-16 items-center justify-between">
                             {/* Logo */}
                             <div className="flex items-center space-x-4">
                                 <Link href="/">
@@ -29,7 +27,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             </div>
 
                             {/* Desktop User Dropdown */}
-                            <div className="hidden sm:flex sm:items-center space-x-3">
+                            <div className="hidden space-x-3 sm:flex sm:items-center">
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <button className="inline-flex items-center rounded-md bg-[var(--primary-color)] px-3 py-2 text-sm font-medium text-white hover:bg-[var(--secondary-color)]">
@@ -51,190 +49,172 @@ export default function AuthenticatedLayout({ header, children }) {
                                     </Dropdown.Content>
                                 </Dropdown>
                             </div>
-
-                            
                         </div>
                     </div>
                 </header>
 
                 {/* ================= DESKTOP SIDEBAR ================= */}
-                <aside className="hidden md:flex flex-col bg-white shadow-md p-4 space-y-4">
+                <aside className="hidden flex-col space-y-4 bg-white p-4 shadow-md md:flex">
                     <h2 className="text-lg font-semibold text-[var(--primary-color)]">Menu</h2>
                     <ul className="space-y-2">
-    <li>
-        <Link
-            href={route('dashboard')}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <LayoutDashboard size={18} />
-            Dashboard
-        </Link>
-    </li>
+                        <li>
+                            <Link
+                                href={route('dashboard')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <LayoutDashboard size={18} />
+                                Dashboard
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('categories.index')}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <Layers size={18} />
-            Categories
-        </Link>
-    </li>
+                        <li>
+                            <Link
+                                href={route('categories.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <Layers size={18} />
+                                Categories
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('brands.index')}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <Bandage size={18} />
-            Brands
-        </Link>
-    </li>
+                        <li>
+                            <Link
+                                href={route('brands.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <Bandage size={18} />
+                                Brands
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('products.index')}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <Package size={18} />
-            Products
-        </Link>
-    </li>
+                        <li>
+                            <Link
+                                href={route('products.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <Package size={18} />
+                                Products
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('trendings.index')}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <ChartNoAxesCombined size={18} />
-            Trendings
-        </Link>
-    </li>
+                        <li>
+                            <Link
+                                href={route('trendings.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <ChartNoAxesCombined size={18} />
+                                Trendings
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('orders.index')}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <ListOrdered size={18} />
-            Orders
-        </Link>
-    </li>
-</ul>
-
+                        <li>
+                            <Link
+                                href={route('orders.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <ListOrdered size={18} />
+                                Orders
+                            </Link>
+                        </li>
+                    </ul>
                 </aside>
 
                 {/* ================= MOBILE SIDEBAR (SLIDE IN) ================= */}
                 {/* Backdrop */}
                 {showingNavigationDropdown && (
-                    <div
-                        onClick={() => setShowingNavigationDropdown(false)}
-                        className="fixed inset-0 bg-black/50 z-40 md:hidden"
-                    />
+                    <div onClick={() => setShowingNavigationDropdown(false)} className="fixed inset-0 z-40 bg-black/50 md:hidden" />
                 )}
 
                 {/* Sidebar */}
                 <aside
-                    className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 md:hidden
-                    ${showingNavigationDropdown ? 'translate-x-0' : '-translate-x-full'}`}
+                    className={`fixed left-0 top-0 z-50 h-full w-64 transform bg-white shadow-lg transition-transform duration-300 md:hidden ${showingNavigationDropdown ? 'translate-x-0' : '-translate-x-full'}`}
                 >
-                    <div className="p-4 flex justify-between items-center border-b">
+                    <div className="flex items-center justify-between border-b p-4">
                         <h2 className="text-lg font-semibold text-[var(--primary-color)]">Menu</h2>
-                        <button
-                            onClick={() => setShowingNavigationDropdown(false)}
-                            className="text-xl"
-                        >
+                        <button onClick={() => setShowingNavigationDropdown(false)} className="text-xl">
                             ✕
                         </button>
                     </div>
 
-                    <ul className="p-4 space-y-2">
-    <li>
-        <Link
-            href={route('dashboard')}
-            onClick={() => setShowingNavigationDropdown(false)}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <LayoutDashboard size={18} />
-            Dashboard
-        </Link>
-    </li>
+                    <ul className="space-y-2 p-4">
+                        <li>
+                            <Link
+                                href={route('dashboard')}
+                                onClick={() => setShowingNavigationDropdown(false)}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <LayoutDashboard size={18} />
+                                Dashboard
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('categories.index')}
-            onClick={() => setShowingNavigationDropdown(false)}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <Layers size={18} />
-            Categories
-        </Link>
-    </li>
+                        <li>
+                            <Link
+                                href={route('categories.index')}
+                                onClick={() => setShowingNavigationDropdown(false)}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <Layers size={18} />
+                                Categories
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('brands.index')}
-            onClick={() => setShowingNavigationDropdown(false)}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <Layers size={18} />
-            Categories
-        </Link>
-    </li>
+                        <li>
+                            <Link
+                                href={route('brands.index')}
+                                onClick={() => setShowingNavigationDropdown(false)}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <Layers size={18} />
+                                Categories
+                            </Link>
+                        </li>
 
-    <li>
-        <Link
-            href={route('products.index')}
-            className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-[var(--primary-color)] hover:text-white"
-        >
-            <Package size={18} />
-            Products
-        </Link>
-    </li>
-</ul>
-
+                        <li>
+                            <Link
+                                href={route('products.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <Package size={18} />
+                                Products
+                            </Link>
+                        </li>
+                    </ul>
                 </aside>
 
                 {/* Mobile Menu Button */}
-                            <div className="flex md:hidden">
-                                <button
-                                    onClick={() => setShowingNavigationDropdown(true)}
-                                    className="p-2 rounded-md text-white bg-[var(--primary-color)]"
-                                >
-                                    ☰
-                                </button>
-                            </div>
+                <div className="flex md:hidden">
+                    <button onClick={() => setShowingNavigationDropdown(true)} className="rounded-md bg-[var(--primary-color)] p-2 text-white">
+                        ☰
+                    </button>
+                </div>
 
                 {/* ================= MAIN CONTENT ================= */}
                 <main className="bg-gray-100 p-4 md:p-6">
-                    {header && (
-                        <h1 className="text-2xl font-semibold text-[var(--primary-color)] text-center mb-4">
-                            {header}
-                        </h1>
-                    )}
+                    {header && <h1 className="mb-4 text-center text-2xl font-semibold text-[var(--primary-color)]">{header}</h1>}
                     {children}
 
                     <Toaster
                         position="top-right"
                         toastOptions={{
-                        duration: 3000,
-                        style: {
-                            borderRadius: '8px',
-                            background: '#111827',
-                            color: '#fff',
-                        },
-                        success: {
-                            iconTheme: {
-                            primary: '#22c55e',
-                            secondary: '#fff',
+                            duration: 3000,
+                            style: {
+                                borderRadius: '8px',
+                                background: '#111827',
+                                color: '#fff',
                             },
-                        },
-                        error: {
-                            iconTheme: {
-                            primary: '#ef4444',
-                            secondary: '#fff',
+                            success: {
+                                iconTheme: {
+                                    primary: '#22c55e',
+                                    secondary: '#fff',
+                                },
                             },
-                        },
+                            error: {
+                                iconTheme: {
+                                    primary: '#ef4444',
+                                    secondary: '#fff',
+                                },
+                            },
                         }}
                     />
                 </main>

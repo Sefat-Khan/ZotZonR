@@ -11,10 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'name',
-        'slug',
-        'product_id',
         'user_id',
-        'image',
         'phone',
         'shipping_address',
         'total_price',
@@ -23,17 +20,12 @@ class Order extends Model
         'status',
     ];
 
-    protected $appends = ['image_url'];
-
-    public function getImageUrlAttribute() {
-        return $this->image ? asset('storage/'. $this->image) : asset('images/no-image.png');
-    }
-
-    public function product () {
-        return $this->belongsTo(Product::class);
-    }
-
     public function user () {
         return $this->belongsTo(User::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

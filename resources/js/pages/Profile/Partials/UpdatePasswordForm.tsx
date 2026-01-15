@@ -5,20 +5,13 @@ import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
+import { CheckCircle2 } from 'lucide-react';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
-    const {
-        data,
-        setData,
-        errors,
-        put,
-        reset,
-        processing,
-        recentlySuccessful,
-    } = useForm({
+    const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
@@ -47,43 +40,35 @@ export default function UpdatePasswordForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
-                    Update Password
-                </h2>
+                <h2 className="text-lg font-bold text-gray-900">Update Password</h2>
 
-                <p className="mt-1 text-sm text-gray-600">
-                    Ensure your account is using a long, random password to stay
-                    secure.
-                </p>
+                <p className="mt-1 text-sm leading-relaxed text-gray-500">Ensure your account is using a long, random password to stay secure.</p>
             </header>
 
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
-                <div>
+            <form onSubmit={updatePassword} className="mt-8 space-y-6">
+                <div className="space-y-1">
                     <InputLabel
                         htmlFor="current_password"
                         value="Current Password"
+                        className="text-xs font-bold uppercase tracking-wider text-gray-400"
                     />
 
                     <TextInput
                         id="current_password"
                         ref={currentPasswordInput}
                         value={data.current_password}
-                        onChange={(e) =>
-                            setData('current_password', e.target.value)
-                        }
+                        onChange={(e) => setData('current_password', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full rounded-xl border-gray-200 shadow-sm focus:border-black focus:ring-black"
                         autoComplete="current-password"
+                        placeholder="••••••••"
                     />
 
-                    <InputError
-                        message={errors.current_password}
-                        className="mt-2"
-                    />
+                    <InputError message={errors.current_password} className="mt-2 text-xs font-bold" />
                 </div>
 
-                <div>
-                    <InputLabel htmlFor="password" value="New Password" />
+                <div className="space-y-1">
+                    <InputLabel htmlFor="password" value="New Password" className="text-xs font-bold uppercase tracking-wider text-gray-400" />
 
                     <TextInput
                         id="password"
@@ -91,49 +76,53 @@ export default function UpdatePasswordForm({ className = '' }) {
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full rounded-xl border-gray-200 shadow-sm focus:border-black focus:ring-black"
                         autoComplete="new-password"
+                        placeholder="••••••••"
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError message={errors.password} className="mt-2 text-xs font-bold" />
                 </div>
 
-                <div>
+                <div className="space-y-1">
                     <InputLabel
                         htmlFor="password_confirmation"
                         value="Confirm Password"
+                        className="text-xs font-bold uppercase tracking-wider text-gray-400"
                     />
 
                     <TextInput
                         id="password_confirmation"
                         value={data.password_confirmation}
-                        onChange={(e) =>
-                            setData('password_confirmation', e.target.value)
-                        }
+                        onChange={(e) => setData('password_confirmation', e.target.value)}
                         type="password"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full rounded-xl border-gray-200 shadow-sm focus:border-black focus:ring-black"
                         autoComplete="new-password"
+                        placeholder="••••••••"
                     />
 
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
+                    <InputError message={errors.password_confirmation} className="mt-2 text-xs font-bold" />
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                <div className="flex items-center gap-4 pt-2">
+                    <button
+                        disabled={processing}
+                        className="rounded-xl bg-black px-8 py-3 text-sm font-bold text-white shadow-xl shadow-gray-200 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                    >
+                        Update Password
+                    </button>
 
                     <Transition
                         show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
+                        enter="transition ease-in-out duration-300"
+                        enterFrom="opacity-0 translate-x-2"
+                        leave="transition ease-in-out duration-300"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600">
-                            Saved.
-                        </p>
+                        <div className="flex items-center gap-2 rounded-lg border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-sm font-bold text-emerald-600">
+                            <CheckCircle2 size={16} />
+                            Saved Successfully
+                        </div>
                     </Transition>
                 </div>
             </form>
