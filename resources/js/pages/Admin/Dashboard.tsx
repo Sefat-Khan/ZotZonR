@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, usePage } from '@inertiajs/react';
 import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
-import { Package, Tag, Layers, CheckCircle, Clock, ArrowRight } from 'lucide-react';
+import { Package, Tag, Layers, CheckCircle, Clock, ArrowRight, Route } from 'lucide-react';
 
 export default function Dashboard() {
     const { products, brands, categories } = usePage().props;
@@ -150,9 +150,12 @@ export default function Dashboard() {
                     <div className="rounded-[2.5rem] border border-gray-100 bg-white p-8 shadow-sm lg:col-span-2">
                         <div className="mb-6 flex items-center justify-between">
                             <h3 className="text-sm font-black uppercase tracking-widest text-gray-900">Latest Product Entries</h3>
-                            <button className="flex items-center gap-1 text-[10px] font-black uppercase text-[var(--primary-color)] hover:underline">
+                            <a
+                                href={route('products.index')}
+                                className="flex items-center gap-1 text-[10px] font-black uppercase text-[var(--primary-color)] hover:underline"
+                            >
                                 View Inventory <ArrowRight size={12} />
-                            </button>
+                            </a>
                         </div>
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
