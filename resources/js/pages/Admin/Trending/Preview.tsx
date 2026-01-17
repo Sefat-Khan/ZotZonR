@@ -114,7 +114,7 @@ export default function Preview({ trending }: Props) {
                                 {/* ACTIONS */}
                                 <div className="flex flex-wrap gap-4 border-t border-red-50 pt-10">
                                     <Link
-                                        href={route('trendings.edit', trending.id)}
+                                        href={route('trendings.index', trending.id)}
                                         className="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-[#2e0000] px-8 py-5 text-xs font-black uppercase tracking-widest text-white shadow-xl shadow-red-900/20 transition-all hover:bg-[#7a0222] active:scale-95"
                                     >
                                         <Edit3 size={18} />

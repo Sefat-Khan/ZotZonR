@@ -32,7 +32,7 @@ export default function Preview({ category }: Props) {
 
                     <div className="flex gap-3">
                         <Link
-                            href={route('categories.edit', category.id)}
+                            href={route('categories.index', category.id)}
                             className="flex items-center gap-2 rounded-xl bg-gray-900 px-6 py-2.5 font-black italic tracking-tighter text-white shadow-lg transition-all hover:bg-[var(--primary-color)]"
                         >
                             <Edit3 size={16} /> EDIT CATEGORY
