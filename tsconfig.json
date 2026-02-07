@@ -116,6 +116,24 @@
     "include": [
         "resources/js/**/*.ts",
         "resources/js/**/*.d.ts",
-        "resources/js/**/*.tsx", "resources/js/app.jsx", "resources/js/Components/Header.tsx", "resources/js/Components/Best.tsx", "resources/js/Components/Feature.tsx", "resources/js/Components/Footer.tsx", "resources/js/Components/Hero.tsx", "resources/js/Components/New.tsx", "resources/js/Components/NewArrival.tsx", "resources/js/Components/Offer.tsx", "resources/js/Components/SpecialOffer.tsx", "resources/js/Layouts/Common.tsx", "resources/js/pages/Product.tsx", "resources/js/pages/Shop.tsx", "resources/js/pages/Welcome.tsx", "resources/js/pages/Admin/Dashboard.tsx", "resources/js/Layouts/GuestLayout.tsx", "resources/js/Layouts/AuthenticatedLayout.tsx", "resources/js/context/CartContext.tsx",
+        "resources/js/**/*.tsx",
+        "resources/js/app.jsx",
+        "resources/js/Components/Header.tsx",
+        "resources/js/Components/Best.tsx",
+        "resources/js/Components/Feature.tsx",
+        "resources/js/Components/Footer.tsx",
+        "resources/js/Components/Hero.tsx",
+        "resources/js/Components/New.tsx",
+        "resources/js/Components/NewArrival.tsx",
+        "resources/js/Components/Offer.tsx",
+        "resources/js/Components/SpecialOffer.tsx",
+        "resources/js/Layouts/Common.tsx",
+        "resources/js/pages/product.tsx",
+        "resources/js/pages/shop.tsx",
+        "resources/js/pages/Welcome.tsx",
+        "resources/js/pages/Admin/Dashboard.tsx",
+        "resources/js/Layouts/GuestLayout.tsx",
+        "resources/js/Layouts/AuthenticatedLayout.tsx",
+        "resources/js/context/CartContext.tsx"
     ]
 }

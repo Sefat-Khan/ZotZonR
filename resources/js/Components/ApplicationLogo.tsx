@@ -1,6 +1,7 @@
-import logo from '../../../public/images/logo.png';
+import { usePage } from '@inertiajs/react';
+import localLogo from '../../../public/images/logo.png';
 export default function ApplicationLogo(props) {
-    return (
-        <img src={logo} alt="FastCart" {...props} />
-    );
+    const { logo } = usePage().props;
+
+    return <img src={logo ? logo.image_url : localLogo} alt="FastCart" {...props} />;
 }

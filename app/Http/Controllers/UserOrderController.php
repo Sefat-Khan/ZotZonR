@@ -26,7 +26,7 @@ public function show(Order $order)
         
         $order->load('items.product');
 
-        return inertia('OrderDetails', [
+        return inertia('orderDetails', [
             'order' => $order,
         ]);
 

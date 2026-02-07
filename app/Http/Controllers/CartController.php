@@ -11,7 +11,7 @@ class CartController extends Controller
     public function show (Product $product) {
         $product->load(['brand', 'category']);
 
-        return Inertia::render('Cart', [
+        return Inertia::render('cart', [
             'product' => $product
         ]);
     }

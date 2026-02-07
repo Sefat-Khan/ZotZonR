@@ -2,10 +2,10 @@ import { useCart } from '@/context/CartContext';
 import { Link, router, usePage } from '@inertiajs/react';
 import { ChevronDown, LogOut, Menu, Package, Search, ShoppingBag, User, X } from 'lucide-react';
 import { useState } from 'react';
-import logo from '../../../public/images/logo.png';
+import localLogo from '../../../public/images/logo.png';
 
 export default function Header() {
-    const { products, categories, auth } = usePage().props;
+    const { products, categories, auth, logo } = usePage().props;
     const [showCategory, setShowCategory] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [mobileMenu, setMobileMenu] = useState(false);
@@ -31,7 +31,7 @@ export default function Header() {
 
     const menuRoutes: Record<string, string> = {
         Home: route('home'),
-        Shop: route('shop.index'),
+        Products: route('shop.index'),
         About: route('about'),
         Contacts: route('contact'),
     };
@@ -43,7 +43,7 @@ export default function Header() {
                 <div className="container mx-auto flex items-center justify-between px-4 py-5 lg:px-0">
                     {/* Logo */}
                     <Link href={route('home')} className="transition-transform hover:scale-105">
-                        <img src={logo} alt="FreshMarket Logo" className="h-10 w-auto object-contain md:h-12" />
+                        <img src={logo ? logo.image_url : localLogo} alt="FreshMarket Logo" className="h-10 w-auto object-contain md:h-12" />
                     </Link>
 
                     {/* Desktop Menu */}
@@ -131,7 +131,7 @@ export default function Header() {
                             <div className="rounded-lg bg-white/10 p-2 transition-colors group-hover:bg-[var(--secondary-color)]">
                                 <Menu size={18} />
                             </div>
-                            <span className="text-sm uppercase tracking-widest">Shop Categories</span>
+                            <span className="text-sm uppercase tracking-widest">Product Categories</span>
                             <ChevronDown className={`transition-transform duration-300 ${showCategory ? 'rotate-180' : ''}`} size={16} />
                         </button>
 
@@ -258,7 +258,7 @@ export default function Header() {
                             <ShoppingBag size={26} className="transition-transform group-hover:scale-110" />
                             {cart.length > 0 && (
                                 <span className="absolute right-0 top-0 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[var(--primary-color)] bg-[var(--secondary-color)] text-[10px] font-black text-white">
-                                    {cart.length}
+                                    {cart.reduce((sum, item) => sum + item.quantity, 0)}
                                 </span>
                             )}
                         </button>

@@ -24,7 +24,6 @@ type Products = {
     id: number;
     name: string;
     slug: string;
-    phone: string;
     image: string;
     image_url: string;
     description: string;
@@ -33,12 +32,15 @@ type Products = {
     status: 'Active' | 'Inactive';
     brand_id: number;
     category_id: number;
+    whatsapp_id: number;
     brand: { id: number; name: string };
     category: { id: number; name: string };
+    whatsApp: { id: number; phone: string };
 };
 
 type Brand = { id: number; name: string };
 type Category = { id: number; name: string };
+type WhatsApp = { id: number; phone: string };
 
 interface Pagination<T> {
     data: T[];
@@ -50,9 +52,10 @@ interface Props {
     products: Pagination<Products>;
     brands: Brand[];
     categories: Category[];
+    whatsapps: WhatsApp[];
 }
 
-export default function Products({ products, brands, categories }: Props) {
+export default function Products({ products, brands, categories, whatsapps }: Props) {
     const [tableData, setTableData] = useState<Products[]>(products.data);
     const [modalOpen, setModalOpen] = useState(false);
     const [editingProducts, setEditingProducts] = useState<Products | null>(null);
@@ -68,13 +71,13 @@ export default function Products({ products, brands, categories }: Props) {
     } = useForm({
         name: '',
         slug: '',
-        phone: '012345678912',
         image: null as File | null,
         description: '',
         price: 0,
         discount_price: 0,
         brand_id: null as number | null,
         category_id: null as number | null,
+        whatsapp_id: null as number | null,
         status: 'Active' as 'Active' | 'Inactive',
         _method: 'POST' as 'POST' | 'PUT',
     });
@@ -131,13 +134,13 @@ export default function Products({ products, brands, categories }: Props) {
         setData({
             name: '',
             slug: '',
-            phone: '012345678912',
             image: null,
             description: '',
             price: 0,
             discount_price: 0,
             brand_id: null,
             category_id: null,
+            whatsapp_id: null,
             status: 'Active',
             _method: 'POST',
         });
@@ -151,7 +154,6 @@ export default function Products({ products, brands, categories }: Props) {
         setData({
             name: product.name,
             slug: product.slug,
-            phone: product.phone,
             image: null,
             description: product.description,
             price: product.price,
@@ -159,6 +161,7 @@ export default function Products({ products, brands, categories }: Props) {
             status: product.status,
             brand_id: product.brand_id,
             category_id: product.category_id,
+            whatsapp_id: product.whatsapp_id,
             _method: 'PUT',
         });
         setImagePreview(product.image_url);
@@ -266,6 +269,9 @@ export default function Products({ products, brands, categories }: Props) {
                                                 </span>
                                                 <span className="rounded bg-blue-50 px-2 py-0.5 text-[9px] font-black uppercase text-blue-500">
                                                     {p.category.name}
+                                                </span>
+                                                <span className="rounded bg-blue-50 px-2 py-0.5 text-[9px] font-black uppercase text-blue-500">
+                                                    {p.whatsApp ? p.whatsApp.phone : 'No WhatsApp'}
                                                 </span>
                                             </div>
                                         </td>
@@ -404,6 +410,33 @@ export default function Products({ products, brands, categories }: Props) {
                                 </FormField>
                             </div>
 
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                <FormField label="WhatsApp" icon={<Package size={14} />} error={errors.whatsapp_id}>
+                                    <select
+                                        value={data.whatsapp_id ?? ''}
+                                        onChange={(e) => setData('whatsapp_id', Number(e.target.value))}
+                                        className="form-input-modern"
+                                    >
+                                        <option value="">Select WhatsApp</option>
+                                        {whatsapps.map((w) => (
+                                            <option key={w.id} value={w.id}>
+                                                {w.phone}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </FormField>
+                                <FormField label="Status" error={errors.status}>
+                                    <select
+                                        value={data.status}
+                                        onChange={(e) => setData('status', e.target.value as any)}
+                                        className="form-input-modern"
+                                    >
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </FormField>
+                            </div>
+
                             <FormField label="Description" error={errors.description}>
                                 <textarea
                                     rows={3}
@@ -430,16 +463,6 @@ export default function Products({ products, brands, categories }: Props) {
                                         onChange={(e) => setData('discount_price', Number(e.target.value))}
                                         className="form-input-modern"
                                     />
-                                </FormField>
-                                <FormField label="Status" error={errors.status}>
-                                    <select
-                                        value={data.status}
-                                        onChange={(e) => setData('status', e.target.value as any)}
-                                        className="form-input-modern"
-                                    >
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                    </select>
                                 </FormField>
                             </div>
 

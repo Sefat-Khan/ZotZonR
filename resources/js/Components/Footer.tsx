@@ -1,7 +1,6 @@
-import { Link } from '@inertiajs/react';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
-import React from 'react';
-import logo from '../../../public/images/logo.png';
+import { Link, usePage } from '@inertiajs/react';
+import { Facebook, Instagram, Mail, MapPin, Phone, Twitter } from 'lucide-react';
+import localLogo from '../../../public/images/logo.png';
 
 export default function Footer() {
     const menuRoutes = {
@@ -12,6 +11,8 @@ export default function Footer() {
         Checkout: route('checkout'),
     };
 
+    const { logo } = usePage();
+
     const groceryCategories = ['Organic Fruits', 'Fresh Vegetables', 'Dairy & Eggs', 'Meat & Seafood', 'Spices & Oils', 'Daily Essentials'];
 
     return (
@@ -20,7 +21,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
                     {/* Brand Column (4 Cols) */}
                     <div className="space-y-6 lg:col-span-4">
-                        <img src={logo} alt="Logo" className="h-12" />
+                        <img src={logo ? logo.image_url : localLogo} alt="Logo" className="h-12" />
                         <p className="max-w-sm text-sm leading-relaxed text-gray-500">
                             Bringing the farm to your doorstep. We specialize in providing the freshest, highest-quality organic groceries for a
                             healthier lifestyle.
@@ -40,9 +41,10 @@ export default function Footer() {
                                 <li key={item}>
                                     <Link
                                         href={menuRoutes[item]}
-                                        className="text-sm font-bold text-gray-600 transition-all hover:text-[var(--secondary-color)]"
+                                        className="group relative text-sm font-bold text-gray-600 transition-all hover:text-[var(--secondary-color)]"
                                     >
                                         {item}
+                                        <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-[var(--secondary-color)] transition-all group-hover:w-full"></span>
                                     </Link>
                                 </li>
                             ))}

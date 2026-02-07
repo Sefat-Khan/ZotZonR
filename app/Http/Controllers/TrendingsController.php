@@ -14,8 +14,8 @@ class TrendingsController extends Controller
      */
     public function index()
     {
-        
-        return Inertia::render('Admin/Trending/Trendings', ['trendings' => Trending::latest()->paginate(8)]);
+
+        return Inertia::render('Admin/trending/trendings', ['trendings' => Trending::latest()->paginate(8)]);
 
     }
 
@@ -53,7 +53,7 @@ Trending::create($validatedData);
      */
     public function show(Trending $trending)
     {
-        return Inertia::render('Admin/Trending/Preview', [
+        return Inertia::render('Admin/trending/preview', [
         'trending' => [
             'id' => $trending->id,
             'name' => $trending->name,

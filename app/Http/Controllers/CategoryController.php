@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::orderBy('id', 'desc')->paginate(8);
-        return Inertia::render('Admin/Category/Categories', [
+        return Inertia::render('Admin/category/categories', [
         'categories' => $categories,
     ]);
     }
@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return Inertia::render('Admin/Category/Preview', [
+        return Inertia::render('Admin/category/preview', [
         'category' => [
             'id' => $category->id,
             'name' => $category->name,

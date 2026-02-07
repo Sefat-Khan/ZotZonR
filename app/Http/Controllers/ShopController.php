@@ -12,7 +12,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Shop', [
+        return Inertia::render('shop', [
             'products' => Product::with(['brand', 'category'])
                 ->where('status', 'Active')
                 ->latest()->get(),

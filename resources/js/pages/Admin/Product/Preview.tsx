@@ -7,7 +7,6 @@ interface Props {
         id: number;
         name: string;
         slug: string;
-        phone: string;
         description: string;
         price: number;
         discount_price: number;
@@ -15,6 +14,7 @@ interface Props {
         image_url: string;
         brand: { id: number; name: string };
         category: { id: number; name: string };
+        whatsapp: { id: number; phone: string } | null;
         created_at: string;
     };
     // Add these if you want to pass prev/next IDs from your Controller
@@ -89,7 +89,7 @@ export default function Preview({ product, prev_id, next_id }: Props) {
                                 <InfoItem label="Brand" value={product.brand.name} />
                                 <InfoItem label="Category" value={product.category.name} />
                                 <InfoItem label="Slug" value={product.slug} />
-                                <InfoItem label="Phone" value={product.phone} />
+                                <InfoItem label="Phone" value={product.whatsapp?.phone || 'No WhatsApp'} />
                             </div>
 
                             <div>

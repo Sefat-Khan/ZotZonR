@@ -19,10 +19,11 @@ export function CartProvider({ children }) {
 
   useEffect(() => {
     try {
-      if (cart.length === 0) {
-        localStorage.removeItem("cart");
+      if (!cart || cart.length === 0) {
+          localStorage.removeItem('cart');
+          return;
       } else {
-        localStorage.setItem("cart", JSON.stringify(cart));
+          localStorage.setItem('cart', JSON.stringify(cart));
       }
     } catch (error) {
       console.error("Cart storage error:", error);

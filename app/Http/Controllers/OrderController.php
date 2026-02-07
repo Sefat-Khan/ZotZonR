@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return inertia('Admin/Order/Orders', [
+        return inertia('Admin/order/orders', [
             'orders' => Order::with('items.product')->latest()->paginate(8),
         ]);
     }
@@ -67,7 +67,7 @@ class OrderController extends Controller
     public function show(Order $order)
 {
 
-    return inertia('Admin/Order/Preview', [
+    return inertia('Admin/order/preview', [
         'order' => $order->load('items.product'),
     ]);
 }

@@ -58,7 +58,7 @@ export default function CheckoutContent() {
                     setName('');
                     setPhone('');
                     setAddress('');
-                    router.visit(route('user.order'));
+                    router.replace(route('user.order'));
                 },
                 onError: () => {
                     toast.error('Failed to place order. Please try again.', { id: toastId });

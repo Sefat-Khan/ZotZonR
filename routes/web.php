@@ -9,6 +9,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TrendingsController;
 use App\Http\Controllers\UserOrderController;
+use App\Http\Controllers\WhatsAppController;
+use App\Http\Controllers\LogoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,18 +29,18 @@ Route::get('/', function () {
 
 Route::get('/cart/{product}', [CartController::class, 'show'])->name('cart.show');
 
-Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/products', [ShopController::class, 'index'])->name('shop.index');
 
 Route::get('/checkout', function () {
-    return Inertia::render('CheckOut');
+    return Inertia::render('checkOut');
 })->name('checkout');
 
 Route::get('/about', function () {
-    return Inertia::render('About');
+    return Inertia::render('about');
 })->name('about');
 
 Route::get('/contact', function () {
-    return Inertia::render('Contact');
+    return Inertia::render('contact');
 })->name('contact');
 
 
@@ -65,6 +67,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::resource('/admin/orders', OrderController::class)
         ->names('orders');
+
+    Route::resource('/admin/whatsApp', WhatsAppController::class)
+        ->names('whatsApp');
+
+    Route::resource('/admin/logo', LogoController::class)
+        ->names('logo');
 
 });
 

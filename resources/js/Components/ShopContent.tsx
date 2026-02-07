@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { ChevronLeft, ChevronRight, Heart, RefreshCw, ShoppingCart, SlidersHorizontal, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Heart, Package, RefreshCw, ShoppingCart, SlidersHorizontal, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import FilterSection from './filterSection';
 

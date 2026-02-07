@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Logo;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Trending;
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         'categories' => fn () => Category::all(),
         'trendings' => fn () => Trending::all(),
         'brands' => fn () => Brand::all(),
+        'logo' => fn () => Logo::first(),
     ]);
     }
 }

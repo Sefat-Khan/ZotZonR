@@ -14,7 +14,7 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::orderBy('id', 'desc')->paginate(8);
-        return Inertia::render('Admin/Brand/Brands', ['brands' => $brands]);
+        return Inertia::render('Admin/brand/brands', ['brands' => $brands]);
     }
 
     /**
@@ -46,7 +46,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        return Inertia::render('Admin/Brand/Preview', [
+        return Inertia::render('Admin/brand/preview', [
         'brand' => [
             'id' => $brand->id,
             'name' => $brand->name,

@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { LayoutDashboard, Layers, Package, Bandage, ChartNoAxesCombined, ListOrdered } from "lucide-react";
+import { LayoutDashboard, Layers, Package, Bandage, ChartNoAxesCombined, ListOrdered, Phone, ImagePlus } from 'lucide-react';
 
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="flex h-16 items-center justify-between">
                             {/* Logo */}
                             <div className="flex items-center space-x-4">
-                                <Link href="/">
+                                <Link href={route('dashboard')}>
                                     <ApplicationLogo className="h-9 w-auto fill-current text-[var(--primary-color)]" />
                                 </Link>
                             </div>
@@ -114,6 +114,26 @@ export default function AuthenticatedLayout({ header, children }) {
                             >
                                 <ListOrdered size={18} />
                                 Orders
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link
+                                href={route('whatsApp.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <Phone size={18} />
+                                WhatsApp
+                            </Link>
+                        </li>
+
+                        <li>
+                            <Link
+                                href={route('logo.index')}
+                                className="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-[var(--primary-color)] hover:text-white"
+                            >
+                                <ImagePlus size={18} />
+                                Image Add
                             </Link>
                         </li>
                     </ul>

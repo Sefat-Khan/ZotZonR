@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 
 export default function ProductCart({ product }) {
     const [quantity, setQuantity] = useState(1);
-    const [zoomStyle, setZoomStyle] = useState({ display: 'none', backgroundPosition: '0% 0%' });
+    const [zoomStyle, setZoomStyle] = useState({ display: 'none', backgroundPosition: '0% 0%', backgroundImage: 'null', backgroundSize: '0%' });
     const { addToCart } = useCart();
     const imageRef = useRef(null);
 
@@ -35,7 +35,7 @@ export default function ProductCart({ product }) {
     };
 
     const handleMouseLeave = () => {
-        setZoomStyle({ display: 'none', backgroundPosition: '0% 0%' });
+        setZoomStyle({ display: 'none', backgroundPosition: '0% 0%', backgroundImage: 'null', backgroundSize: '0%' });
     };
 
     const increaseQty = () => setQuantity((q) => q + 1);
@@ -139,7 +139,7 @@ export default function ProductCart({ product }) {
                         </button>
 
                         <a
-                            href={`https://wa.me/${product.phone}?text=${whatsappMessage}`}
+                            href={`https://wa.me/${product.whatsapp_id}?text=${whatsappMessage}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center gap-3 rounded-2xl bg-[#25D366] px-8 py-5 text-[10px] font-black uppercase tracking-widest text-white transition-all hover:bg-[#128C7E] hover:shadow-xl active:scale-95"

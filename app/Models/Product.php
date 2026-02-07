@@ -12,13 +12,13 @@ class Product extends Model
     protected $fillable = [
         'name',
         'slug',
-        'phone',
         'image',
         'description',
         'price',
         'discount_price',
         'brand_id',
         'category_id',
+        'whatsapp_id',
         'status',
     ];
 
@@ -40,6 +40,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function whatsapp()
+    {
+        return $this->belongsTo(WhatsApp::class);
     }
 
 

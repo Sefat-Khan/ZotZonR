@@ -34,8 +34,8 @@ export default function Product() {
     const displayReviews = showAllReviews ? product.reviews : product.reviews?.slice(0, 1) || [];
 
     return (
-        <CommonLayout header={product.title}>
-            <Head title={product.title} />
+        <CommonLayout header={product.name}>
+            <Head title={product.name} />
 
             <div className="mx-auto max-w-[1440px] bg-white px-6 py-12 lg:py-20">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
@@ -48,7 +48,7 @@ export default function Product() {
                             onMouseMove={handleMouseMove}
                             className={`aspect-square w-full object-contain p-10 transition-opacity duration-300 ${isZoomed ? 'opacity-0' : 'opacity-100'}`}
                             src={product.thumbnail}
-                            alt={product.title}
+                            alt={product.name}
                         />
 
                         {/* ZOOM OVERLAY */}
