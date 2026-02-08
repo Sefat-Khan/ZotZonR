@@ -35,7 +35,7 @@ type Products = {
     whatsapp_id: number;
     brand: { id: number; name: string };
     category: { id: number; name: string };
-    whatsApp: { id: number; phone: string };
+    whatsapp: { id: number; phone: string };
 };
 
 type Brand = { id: number; name: string };
@@ -271,7 +271,7 @@ export default function Products({ products, brands, categories, whatsapps }: Pr
                                                     {p.category.name}
                                                 </span>
                                                 <span className="rounded bg-blue-50 px-2 py-0.5 text-[9px] font-black uppercase text-blue-500">
-                                                    {p.whatsApp ? p.whatsApp.phone : 'No WhatsApp'}
+                                                    {p.whatsapp ? p.whatsapp.phone : 'No WhatsApp'}
                                                 </span>
                                             </div>
                                         </td>
