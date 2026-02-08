@@ -66,7 +66,7 @@ single-page application experience while leveraging Laravel’s powerful backend
 <h2>📦 Installation</h2>
 
 <h3>1. Clone Repository</h3>
-<pre><code>git clone https://github.com/yourusername/zotzonr.git
+<pre><code>git clone https://github.com/Sefat-Khan/ZotZoneR.git
 cd zotzonr</code></pre>
 
 <h3>2. Install Backend Dependencies</h3>
@@ -160,4 +160,5 @@ php artisan view:cache</code></pre>
 
 </body>
 </html>
+
 
