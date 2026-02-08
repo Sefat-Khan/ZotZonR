@@ -3,43 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zotzonr — Ecommerce Platform</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 40px;
-            color: #333;
-            max-width: 900px;
-        }
-        h1, h2, h3 {
-            color: #111;
-        }
-        code {
-            background: #f4f4f4;
-            padding: 4px 6px;
-            border-radius: 4px;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 12px;
-            border-radius: 6px;
-            overflow-x: auto;
-        }
-        ul {
-            margin-left: 20px;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .badge {
-            display: inline-block;
-            padding: 6px 10px;
-            background: #eee;
-            border-radius: 6px;
-            margin-right: 6px;
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -196,3 +160,4 @@ php artisan view:cache</code></pre>
 
 </body>
 </html>
+
