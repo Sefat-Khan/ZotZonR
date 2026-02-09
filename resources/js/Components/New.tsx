@@ -16,8 +16,8 @@ export default function New() {
             <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
                 <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                        <span className="h-[1px] w-8 bg-[var(--secondary-color)]"></span>
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--secondary-color)]">Fresh Picks</span>
+                        <span className="h-[1px] w-8 bg-white/40"></span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40">Fresh Picks</span>
                     </div>
                     <h2 className="text-4xl font-black uppercase italic tracking-tighter text-white md:text-5xl">New Arrivals</h2>
                 </div>

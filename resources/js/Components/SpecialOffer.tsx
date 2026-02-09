@@ -16,11 +16,11 @@ export default function SpecialOffer() {
                 {/* Section Header */}
                 <div className="mb-16 space-y-4 text-center">
                     <div className="flex items-center justify-center gap-3">
-                        <Tag className="text-[var(--secondary-color)]" size={20} />
-                        <span className="text-xs font-black uppercase tracking-[0.5em] text-[var(--secondary-color)]">Unbeatable Prices</span>
+                        <Tag className="text-white/40" size={20} />
+                        <span className="text-xs font-black uppercase tracking-[0.5em] text-white/40">Unbeatable Prices</span>
                     </div>
                     <h2 className="text-5xl font-black uppercase italic tracking-tighter text-white md:text-6xl">
-                        Special <span className="text-[var(--secondary-color)]">Offers</span>
+                        Special <span className="text-white">Offers</span>
                     </h2>
                     <p className="mx-auto max-w-md text-sm font-medium text-white/40">
                         Our most popular items at their lowest prices ever. Grab them before they're gone.

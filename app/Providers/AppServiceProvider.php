@@ -8,6 +8,8 @@ use App\Models\Logo;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Trending;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;

@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         return inertia('Admin/order/orders', [
-            'orders' => Order::with('items.product')->latest()->paginate(8),
+            'orders' => Order::with('items.product', 'user')->latest()->paginate(8),
         ]);
     }
 

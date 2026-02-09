@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import React, { FormEvent, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Eye, Pencil, Trash2, Search, Filter, ChevronUp, ChevronDown } from 'lucide-react';
@@ -26,6 +26,11 @@ type Orders = {
     order_status: 'Processing' | 'Shipped' | 'Complete';
     status: 'Active' | 'Inactive';
     items: OrderItem[];
+
+    user: {
+        id: number;
+        created_at: string;
+    } | null;
 };
 
 interface Pagination<T> {
@@ -44,6 +49,7 @@ export default function Orders({ orders }: Props) {
     const [editingOrders, setEditingOrders] = useState<Orders | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [slug, setSlug] = useState('');
+
 
     const {
         data,
@@ -99,6 +105,17 @@ export default function Orders({ orders }: Props) {
 
         return matchesStatus && matchesOrderStatus && matchesPaymentInfo && matchesSearch;
     });
+
+    const sortedFilterOrders = [...filterOrders].sort((a, b) => {
+
+        const aBottom = a.payment_info === 'Paid' || a.order_status === 'Complete' ? 1 : 0;
+        const bBottom = b.payment_info === 'Paid' || b.order_status === 'Complete' ? 1 : 0;
+
+
+        return aBottom - bBottom;
+    })
+
+
 
     const openEditModal = (order: Orders) => {
         setEditingOrders(order);
@@ -221,8 +238,8 @@ export default function Orders({ orders }: Props) {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-50">
-                                    {filterOrders.map((cat) => (
-                                        <tr key={cat.id} className="group transition-colors hover:bg-gray-50/50">
+                                    {sortedFilterOrders.map((cat) => (
+                                        <tr key={cat.id} className={`group transition-colors hover:bg-gray-50/50 ${cat.user && new Date().getTime() - new Date(cat.user.created_at).getTime() < 7 * 24 * 60 * 60 * 1000 ? 'bg-green-50' : 'bg-red-50'}`}>
                                             <td className="px-6 py-4 text-sm text-gray-500">#{cat.id}</td>
                                             <td className="px-6 py-4">
                                                 <div className="font-semibold text-gray-900">{cat.name}</div>
